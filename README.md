@@ -1,4 +1,4 @@
-# Contao back end: Classic
+# Classic back end for Contao
 
 Contao 5.7 gave the back end a light, white look and moved the list filters into a column on the right.
 This extension adds two options to each user's profile that bring back the look many editors know from
