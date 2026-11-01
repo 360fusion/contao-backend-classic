@@ -1,10 +1,11 @@
 # Classic back end for Contao
 
 Contao 5.7 gave the back end a light, white look and moved the list filters into a column on the right.
-This extension adds two options to each user's profile that bring back the look many editors know from
-Contao 4 and 5.6. Each user chooses for themselves, and anyone who doesn't keeps the standard 5.7 back end.
+This extension adds options to each user's profile that bring back the look many editors know from
+Contao 4 and 5.6, and make edit pages easier to read. Each user chooses for themselves, and anyone who
+doesn't keeps the standard 5.7 back end.
 
-Both options are styling only: no core templates are overridden and no Contao behaviour changes.
+All options are styling only: no core templates are overridden and no Contao behaviour changes.
 
 ![The Forms list with the Classic theme and filters above the list, light mode](docs/classic-light.webp)
 
@@ -24,6 +25,13 @@ ones that ship with Contao 5.7; the extension contains no images of its own.
 
 **Switch it on:** user menu › *Profile* › section *Back end theme* › *Back end theme*: **Classic**.
 
+## Classic Blue theme
+
+The Classic theme with a blue header (`#0072a8`) instead of orange, and blue accents: the current-page
+marker, badges, focus rings and checkboxes. In dark mode the header is a darker blue (`#005a85`).
+
+**Switch it on:** *Back end theme*: **Classic Blue**.
+
 ## Filters above the list
 
 The 5.7 search and filter column becomes a bar above the list, laid out like the Contao 4 filter bar:
@@ -37,7 +45,22 @@ button, and that stays as it is. It works with or without the Classic theme.
 
 **Switch it on:** user menu › *Profile* › section *Back end theme* › tick **Filters above the list**.
 
-Administrators can set both options for other users under *Accounts* › *Users*.
+## Roomier edit pages
+
+Edit pages in 5.7 run their settings together. With this option:
+
+- each setting is its own block, with space and a divider line under it and a gap between the two columns
+- help texts are shown in full instead of being cut off after one line
+- text fields and dropdowns have darker borders and are a little taller
+- the field you are in gets a clear focus ring (5.7 shows none on its dropdowns)
+- checkboxes and radio buttons are larger, with room between the options
+
+Focus rings and checkboxes use the theme's accent colour: blue with Classic Blue, orange with Classic
+or the standard theme. It works with any theme.
+
+**Switch it on:** user menu › *Profile* › section *Back end theme* › tick **Roomier edit pages**.
+
+Administrators can set all options for other users under *Accounts* › *Users*.
 
 ## Installation
 
@@ -48,7 +71,7 @@ composer require 360fusion/contao-backend-classic
 vendor/bin/contao-console contao:migrate
 ```
 
-The database update adds one column, `tl_user.filtersOnTop`.
+The database update adds two columns, `tl_user.filtersOnTop` and `tl_user.roomierForms`.
 
 ## Requirements
 
@@ -60,9 +83,9 @@ The database update adds one column, `tl_user.filtersOnTop`.
 
 ## How it works
 
-An event listener adds a stylesheet to back end pages for users who picked an option. *Classic* is listed
-in the *Back end theme* dropdown but has no theme folder, so Contao keeps the standard `flexible` theme
-as the base and the Classic colours are layered on top.
+An event listener adds a stylesheet to back end pages for users who picked an option. *Classic* and
+*Classic Blue* are listed in the *Back end theme* dropdown but have no theme folder, so Contao keeps the
+standard `flexible` theme as the base and their colours are layered on top.
 
 ## Updating Contao
 
@@ -72,8 +95,8 @@ release that changes these may need an update of this extension; check it before
 ## Uninstalling
 
 Remove the package with the Contao Manager or `composer remove 360fusion/contao-backend-classic`. Users
-who picked Classic fall back to the standard theme automatically. The `tl_user.filtersOnTop` column stays
-until the next database update removes it.
+who picked Classic or Classic Blue fall back to the standard theme automatically. The two `tl_user` columns
+stay until the next database update removes them.
 
 ## Licence
 

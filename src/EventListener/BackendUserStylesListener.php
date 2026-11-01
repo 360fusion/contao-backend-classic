@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * Adds the back end stylesheets for the look a user picked in their profile:
- * the Classic theme (the Contao 5.6 colours) and the filters above the list.
+ * the Classic themes (the Contao 5.6 colours, or in blue), the filters above the list and the roomier edit pages.
  */
 #[AsEventListener]
 class BackendUserStylesListener
@@ -35,12 +35,20 @@ class BackendUserStylesListener
             return;
         }
 
-        if ('classic' === $user->backendTheme) {
+        if (\in_array($user->backendTheme, ['classic', 'classic-blue'], true)) {
             $GLOBALS['TL_CSS'][] = 'bundles/fusion360backendclassic/classic.css';
+        }
+
+        if ('classic-blue' === $user->backendTheme) {
+            $GLOBALS['TL_CSS'][] = 'bundles/fusion360backendclassic/classic-blue.css';
         }
 
         if ($user->filtersOnTop) {
             $GLOBALS['TL_CSS'][] = 'bundles/fusion360backendclassic/filters-top.css';
+        }
+
+        if ($user->roomierForms) {
+            $GLOBALS['TL_CSS'][] = 'bundles/fusion360backendclassic/roomier-forms.css';
         }
     }
 }

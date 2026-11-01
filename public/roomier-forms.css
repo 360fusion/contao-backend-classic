@@ -1,0 +1,74 @@
+/*
+ * Roomier edit pages: each setting as its own block, stronger and taller fields, a visible focus
+ * ring and larger checkboxes, all in the theme's accent colour (var(--contao)).
+ * Styling only. Loaded by Fusion360\BackendClassicBundle\EventListener\BackendUserStylesListener.
+ */
+
+:root {
+    --roomier-field-border: #767676;
+}
+
+html[data-color-scheme="dark"] {
+    --roomier-field-border: #8b8e94;
+}
+
+/* Settings as separate blocks: a gap between the columns and a light rule under each one */
+.tl_formbody_edit .widget-group {
+    --widget-gap-cols: 32px;
+}
+
+.tl_formbody_edit .widget-group > .widget {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--content-border);
+}
+
+.tl_formbody_edit .widget > h3 {
+    margin-bottom: 4px;
+}
+
+/* Show the whole help text instead of cutting it off */
+.tl_formbody_edit .tl_help {
+    margin-top: 6px;
+    line-height: 1.4;
+    height: auto; /* 5.7's .tl_tip fixes it to one line */
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+
+/* Fields: darker borders and a bit taller */
+.tl_formbody_edit :is(.tl_text, .tl_text_2, .tl_text_3, .tl_text_4, .tl_text_unit, .tl_text_interval, .tl_text_trbl, .tl_textarea, .choices.tl_select) {
+    border-color: var(--roomier-field-border);
+}
+
+.tl_formbody_edit :is(.tl_text, .tl_text_2, .tl_text_3, .tl_text_4, .tl_text_unit, .tl_text_interval, .tl_text_trbl) {
+    min-height: 36px;
+    padding: 8px 10px;
+}
+
+.tl_formbody_edit .choices.tl_select {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+/* A visible focus ring; 5.7 removes the outline from its dropdowns */
+.tl_formbody_edit :is(.tl_text, .tl_text_2, .tl_text_3, .tl_text_4, .tl_text_unit, .tl_text_interval, .tl_text_trbl, .tl_textarea):focus-visible,
+.tl_formbody_edit .choices.tl_select.is-focused {
+    outline: 2px solid var(--contao);
+    outline-offset: 1px;
+}
+
+/* Larger checkboxes and radios, ticked in the accent colour, with room between the options */
+.tl_formbody_edit :is(.tl_checkbox, .tl_radio) {
+    width: 18px;
+    height: 18px;
+    margin: 0 6px 0 0;
+    vertical-align: -4px;
+    accent-color: var(--contao);
+}
+
+.tl_formbody_edit :is(.tl_checkbox_container, .tl_radio_container) > span {
+    display: block;
+    margin-block: 6px;
+}

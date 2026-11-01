@@ -120,7 +120,42 @@ html[data-color-scheme="dark"] #home::before {
 
 html[data-color-scheme="dark"] #left {
     --nav-current: #272a30;
+    --nav-separator: #3f3f3f;
     background: #1b1d21;
+}
+
+/* Section headings stand out from the links below them */
+#tl_navigation .menu_level_0 a[class^="group-"] {
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+/* The Events section of codefog/contao-events_subscriptions has no icon: Contao's own calendar icon,
+   used as a shape like the other section icons */
+#tl_navigation .group-events_subscriptions {
+    position: relative;
+    background: none;
+}
+
+#tl_navigation .group-events_subscriptions::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    width: 13px;
+    height: 13px;
+    background: #9fa4a8; /* Size and colour of Contao's other section icons */
+    mask: url("/bundles/contaocalendar/calendar.svg") no-repeat center / 13px;
+}
+
+/* 5.6's divider lines between the sections */
+#tl_navigation .menu_level_0 > li:not(:first-of-type)::before {
+    content: "";
+    display: block;
+    height: 1px;
+    margin: 0 15px 20px;
+    background: var(--nav-separator, #3a454d);
 }
 
 #tl_navigation [class^="menu_level_"] a {
@@ -130,4 +165,11 @@ html[data-color-scheme="dark"] #left {
 #tl_navigation .menu_level_1 a:hover,
 #tl_navigation .menu_level_1 li.current > a {
     color: #eaedf1;
+}
+
+/* The selected page and the one under the mouse tinted in the theme's accent colour */
+#tl_navigation [class^="menu_level_"] > li.current > a,
+#tl_navigation [class^="menu_level_"] a:hover {
+    background-color: color-mix(in srgb, var(--contao) 40%, transparent);
+    color: #fff;
 }

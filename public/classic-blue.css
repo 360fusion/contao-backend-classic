@@ -1,0 +1,23 @@
+/*
+ * Classic Blue: the Classic theme with a blue header and blue accents. Loaded after classic.css by
+ * Fusion360\BackendClassicBundle\EventListener\BackendUserStylesListener.
+ */
+
+:root {
+    --header-bg: #0072a8;
+    --header-bg-hover: #005a85;
+    --contao: #0072a8;
+}
+
+html[data-color-scheme="dark"] {
+    --header-bg: #005a85;
+    --header-bg-hover: #00486b;
+    --header-text: #fff;
+    --contao: #009ee0; /* The lighter blue keeps the accents readable on dark backgrounds */
+}
+
+/* Classic shows 5.7's logo unchanged on its charcoal dark bar; on a blue bar it needs the white mark too */
+html[data-color-scheme="dark"] #home::before {
+    filter: invert(1) grayscale(1) brightness(2) contrast(10);
+    mix-blend-mode: screen;
+}
