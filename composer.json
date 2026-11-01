@@ -1,0 +1,26 @@
+{
+    "name": "360fusion/contao-backend-classic",
+    "description": "Contao 5.7 back end: the Classic theme (the 5.6 colours) and filters above the list, as per-user settings",
+    "type": "contao-bundle",
+    "keywords": ["contao", "backend", "theme", "filter"],
+    "homepage": "https://github.com/360fusion/contao-backend-classic",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "contao/core-bundle": "^5.7"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fusion360\\BackendClassicBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Fusion360\\BackendClassicBundle\\ContaoManager\\Plugin"
+    }
+}

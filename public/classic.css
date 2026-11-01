@@ -1,0 +1,133 @@
+/*
+ * Classic back end theme: the Contao 5.6 colours (orange header, dark navigation, grey surfaces)
+ * on top of the 5.7 "flexible" theme. Loaded by Fusion360\BackendClassicBundle\EventListener\BackendUserStylesListener.
+ * Text colours keep their 5.7 values, which were changed to meet WCAG contrast.
+ */
+
+:root {
+    --header-bg: #f47c00;
+    --header-bg-hover: #e67300;
+    --header-text: #fff;
+    --body-bg: #eaeaec;
+    --content-border: #cacacc;
+    --table-header: #f7f7f8;
+    --table-even: #fbfbfc;
+    --tree-line: #ddd;
+    --form-border: #aaa;
+    --form-border-disabled: #c8c8c8;
+    --form-bg-hover: #f6f6f6;
+    --form-button: #eee;
+    --form-button-hover: #f6f6f6;
+    --form-button-active: #aaa;
+    --form-button-disabled: #e9e9e9;
+    --code-bg: #f0f0f0;
+    --checkerbox-bg: #ddd;
+}
+
+html[data-color-scheme="dark"] {
+    --header-bg: #292c32;
+    --header-bg-hover: #202327;
+    --header-text: #ddd;
+    --body-bg: #121416;
+    --content-bg: #1b1d21;
+    --content-border: #414448;
+    --border: #303236;
+    --table-header: #232529;
+    --table-odd: #1b1d21;
+    --table-even: #1e2024;
+    --tree-line: #30343b;
+    --form-border: #44464b;
+    --form-border-disabled: #3a3c40;
+    --form-bg: #151619;
+    --form-bg-hover: #1e2024;
+    --form-button: #31333a;
+    --form-button-hover: #383a42;
+    --form-button-active: #777;
+    --form-button-disabled: #26272c;
+    --code-bg: #30343b;
+    --checkerbox-bg: #30343b;
+}
+
+/* Header */
+#header {
+    border-bottom-color: transparent;
+}
+
+/* Like 5.6 and 5.7, only the logo's mark shows and its tile blends into the bar: 5.7's own logo
+   (white tile, orange mark) is filtered to a white mark on black, and "screen" drops the black */
+#home {
+    background: none;
+}
+
+#home::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+    background: url("/system/themes/flexible/icons/logo.svg") no-repeat center / 24px;
+    filter: invert(1) grayscale(1) brightness(2) contrast(10);
+    mix-blend-mode: screen;
+}
+
+/* On the dark bar 5.7's logo shows as 5.7 shows it */
+html[data-color-scheme="dark"] #home::before {
+    filter: none;
+    mix-blend-mode: normal;
+}
+
+#home .app-title {
+    color: var(--header-text);
+}
+
+/* Light icons on the header; the dropdown menus keep their own */
+#tmenu {
+    --icon-alert: url("/system/themes/flexible/icons/alert--dark.svg");
+    --icon-jobs: url("/system/themes/flexible/icons/jobs--dark.svg");
+    --icon-favorite: url("/system/themes/flexible/icons/favorite--dark.svg");
+    --icon-favorite-active: url("/system/themes/flexible/icons/favorite_active--dark.svg");
+    --icon-manual: url("/system/themes/flexible/icons/manual--dark.svg");
+    --icon-chevron-down: url("/system/themes/flexible/icons/chevron-down--dark.svg");
+}
+
+#tmenu a,
+#tmenu .profile button,
+#tmenu .burger button {
+    color: var(--header-text);
+}
+
+#tmenu a:hover,
+#tmenu a.hover,
+#tmenu .profile button:hover,
+#tmenu .profile button.active,
+#tmenu .burger button:hover {
+    background-color: var(--header-bg-hover);
+}
+
+/* Navigation */
+#left {
+    --nav-current: #172b3b;
+    --nav-group: #9fa4a8;
+    --icon-favorites-group: url("/system/themes/flexible/icons/favorites_group--dark.svg");
+    --icon-content: url("/system/themes/flexible/icons/content--dark.svg");
+    --icon-monitor: url("/system/themes/flexible/icons/monitor--dark.svg");
+    --icon-person: url("/system/themes/flexible/icons/person--dark.svg");
+    --icon-wrench: url("/system/themes/flexible/icons/wrench--dark.svg");
+    background: #0f1c26;
+}
+
+html[data-color-scheme="dark"] #left {
+    --nav-current: #272a30;
+    background: #1b1d21;
+}
+
+#tl_navigation [class^="menu_level_"] a {
+    color: #d3d6da;
+}
+
+#tl_navigation .menu_level_1 a:hover,
+#tl_navigation .menu_level_1 li.current > a {
+    color: #eaedf1;
+}

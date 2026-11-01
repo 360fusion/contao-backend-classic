@@ -1,0 +1,179 @@
+/*
+ * Filters above the list, styled like the old Contao 4 filter bar: a grey strip joined to the top of
+ * the list, "Filter:" with the dropdowns right-aligned, then "Search: [field] = [keyword]" and "Show:".
+ * Styling only; below 1280px 5.7 already hides the panel behind its Filter button, so that stays.
+ * Loaded by Fusion360\BackendClassicBundle\EventListener\BackendUserStylesListener.
+ */
+
+@media (width >= 1280px) {
+    #main .tl_show_all:has(> .content-filter),
+    #main .tree-view:has(> .content-filter) {
+        grid-template-columns: minmax(0, 1fr);
+        align-content: start; /* 5.7's min-height: 100% would otherwise stretch the rows apart */
+        row-gap: var(--main-panel-gap, 10px);
+    }
+
+    #main .tl_show_all:has(> .content-filter):has(> .operations, > #picker-menu),
+    #main .tree-view:has(> .content-filter):has(> .operations, > #picker-menu) {
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "top"
+            "filter"
+            "listing";
+    }
+
+    #main .content-filter {
+        position: relative;
+        top: auto; /* 5.7 sets top: 15px for its sticky column, which would push the bar over the list */
+        order: -1;
+        margin-bottom: 0;
+        display: block;
+        background: var(--panel-bg);
+    }
+
+    /* One box: the filter bar sits directly on top of the list */
+    #main .tl_show_all:has(> .content-filter + .content-inner) {
+        row-gap: 0;
+
+        > .content-filter {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        > .content-inner {
+            border-top: 0;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    }
+
+    .content-filter .tl_formbody {
+        padding: 0;
+    }
+
+    /* 5.7 puts every panel in one group; the filters get their own row again, the rest follow */
+    .content-filter .tl_panel {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px 20px;
+        padding: 0 0 12px;
+    }
+
+    /* Leave room for Apply and Reset in the bottom-right corner: after the last box on the bottom row
+       (the filters are moved to the top, so that is the last box that is not the filters) ... */
+    .content-filter .tl_formbody .tl_panel > .tl_subpanel:not(.tl_filter):not(:has(~ .tl_subpanel:not(.tl_filter))) {
+        margin-right: 170px;
+    }
+
+    /* Without filters nothing else adds space above the search row */
+    .content-filter .tl_panel:not(:has(> .tl_filter)) {
+        padding-top: 12px;
+    }
+
+    /* ... or, with only filters, in a row of their own below them */
+    .content-filter .tl_panel:not(:has(> .tl_subpanel:not(.tl_filter))) {
+        padding-bottom: 54px;
+    }
+
+    .content-filter .tl_formbody .tl_subpanel {
+        margin: 0;
+        padding-block: 0;
+        border: 0;
+    }
+
+    /* "Search: [field] = [keyword]", "Sort: [ ]" and "Show: [ ]" */
+    .content-filter :is(.tl_search, .tl_sorting, .tl_limit) {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        > * {
+            margin: 0 !important;
+        }
+
+        :is(.tl_select_wrapper, .tl_text) {
+            width: 170px;
+        }
+    }
+
+    .content-filter .tl_search > legend {
+        float: left; /* A floated legend sits inline instead of above the fieldset */
+    }
+
+    .content-filter :is(.tl_search > legend, .tl_filter > legend, .tl_sorting > label, .tl_limit > label) {
+        font-weight: 600;
+
+        &::after {
+            content: ":";
+        }
+    }
+
+    .content-filter .tl_search > label[for="tl_search"] {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    /* The keyword label shows as "=" like before, screen readers still read "Keyword" */
+    .content-filter .tl_search > label[for="tl_search_term"] {
+        font-size: 0;
+
+        &::after {
+            content: "=";
+            font-size: 0.875rem;
+        }
+    }
+
+    /* Filters right-aligned, "Label [dropdown]" pairs that only wrap between pairs */
+    .content-filter .tl_formbody .tl_filter {
+        order: -1;
+        flex: 1 1 100%;
+        display: block;
+        padding-block: 8px 12px;
+        border-bottom: 1px solid var(--content-border);
+        text-align: right;
+        white-space: nowrap;
+
+        > legend {
+            float: left;
+            margin: 6px 0 0 !important;
+        }
+
+        padding-right: 0 !important; /* The dropdowns' right margin keeps them off the edge */
+
+        > label {
+            display: inline;
+            margin: 0 8px 0 0 !important;
+            font-size: inherit;
+
+            /* The only place a row may break */
+            &::before {
+                content: "\200B";
+                white-space: normal;
+            }
+        }
+
+        > .tl_select_wrapper {
+            display: inline-block;
+            width: 200px;
+            margin: 4px 16px 4px 0 !important; /* On the right, so every row ends the same way */
+            vertical-align: middle;
+            text-align: left;
+            white-space: normal;
+        }
+    }
+
+    .content-filter .tl_submit_panel {
+        position: absolute;
+        inset: auto 0 0 auto;
+        grid-template-columns: repeat(2, max-content);
+        padding: 0 15px 12px 0;
+        background: none;
+        border: 0;
+    }
+}
