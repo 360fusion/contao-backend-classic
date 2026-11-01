@@ -53,6 +53,7 @@ The database update adds one column, `tl_user.filtersOnTop`.
 ## Requirements
 
 - Contao 5.7 (tested with 5.7.15) and PHP 8.3
+- Back end languages: English and German
 - A current browser: Chrome or Edge 120+, Safari 17.2+, Firefox 121+. The stylesheets use `:has()` and
   CSS nesting; older browsers show the standard 5.7 back end in places.
 - Contao installed at the root of its domain, as the stylesheets link to Contao's own icons by path
